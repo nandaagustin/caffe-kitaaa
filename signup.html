@@ -8,186 +8,223 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        body{
+        body {
             background:
-            linear-gradient(rgba(44,32,22,0.8), rgba(44,32,22,0.8)),
-            url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80');
-
-            background-size:cover;
-            background-position:center;
-
-            height:100vh;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
+                linear-gradient(rgba(44,32,22,0.8), rgba(44,32,22,0.8)),
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .signup-container{
-
-            background:rgba(255,255,255,0.1);
-
-            backdrop-filter:blur(15px);
-
-            padding:40px;
-
-            border-radius:20px;
-
-            border:1px solid rgba(212,165,116,0.3);
-
-            width:90%;
-            max-width:450px;
-
-            text-align:center;
-
-            color:#f5e6d3;
+        .signup-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212,165,116,0.3);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            color: #f5e6d3;
         }
 
-        .logo-login{
-            width:80px;
-            border-radius:10px;
-            margin-bottom:20px;
+        .logo-login {
+            width: 80px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        h2{
-            margin-bottom:25px;
-            color:#d4a574;
-            font-size:28px;
+        h2 {
+            margin-bottom: 25px;
+            color: #d4a574;
+            font-size: 28px;
         }
 
-        .input-group{
-            margin-bottom:15px;
-            text-align:left;
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        .input-group label{
-            display:block;
-            margin-bottom:5px;
-            font-size:14px;
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
         }
 
-        .input-group input{
-
-            width:100%;
-
-            padding:10px 15px;
-
-            border-radius:8px;
-
-            border:1px solid rgba(255,255,255,0.2);
-
-            background:rgba(255,255,255,0.05);
-
-            color:#fff;
-
-            outline:none;
+        .input-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            outline: none;
+            font-size: 14px;
         }
 
-        .input-group input:focus{
-            border-color:#d4a574;
+        .input-group input::placeholder {
+            color: rgba(255,255,255,0.4);
         }
 
-        .btn-submit{
-
-            width:100%;
-
-            padding:12px;
-
-            background:#d4a574;
-
-            color:#3d2b1f;
-
-            border:none;
-
-            border-radius:8px;
-
-            font-weight:bold;
-
-            cursor:pointer;
-
-            margin-top:10px;
-
-            transition:0.3s;
+        .input-group input:focus {
+            border-color: #d4a574;
         }
 
-        .btn-submit:hover{
-            background:#fff;
-            transform:translateY(-2px);
+        /* Feedback pesan error / sukses di bawah input */
+        .input-group .field-error {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
         }
 
-        .footer-text{
-            margin-top:20px;
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #d4a574;
+            color: #3d2b1f;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
-        .footer-text a{
-            color:#d4a574;
-            text-decoration:none;
-            font-weight:bold;
+        .btn-submit:hover:not(:disabled) {
+            background: #fff;
+            transform: translateY(-2px);
         }
 
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Alert box untuk pesan global */
+        .alert-box {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: none;
+            text-align: left;
+        }
+
+        .alert-box.success {
+            background: rgba(72,199,142,0.2);
+            border: 1px solid #48c78e;
+            color: #48c78e;
+        }
+
+        .alert-box.error {
+            background: rgba(255,107,107,0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .footer-text a {
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Spinner loading */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #3d2b1f;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
-
 </head>
 
 <body>
 
     <div class="signup-container">
 
-        <img src="assets/images/logocoffe.png" alt="Logo" class="logo-login">
+        <img src="assets/images/logocoffe.png" alt="Logo Coffee Kita" class="logo-login">
 
         <h2>BUAT AKUN</h2>
 
-        <form id="signupForm">
+        <!-- Alert box untuk pesan sukses / error global -->
+        <div class="alert-box" id="alertBox"></div>
+
+        <!-- Hanya ADA SATU form dengan id="signupForm" -->
+        <form id="signupForm" novalidate>
 
             <div class="input-group">
-
-                <label>Nama Lengkap</label>
-
+                <label for="fullname">Nama Lengkap</label>
                 <input
                     type="text"
                     id="fullname"
+                    name="fullname"
                     placeholder="Masukkan nama lengkap..."
                     required
                 >
-
+                <span class="field-error" id="fullname-error"></span>
             </div>
 
             <div class="input-group">
-
-                <label>Email / Username</label>
-
+                <label for="email">Email</label>
                 <input
-                    type="text"
-                    id="username"
-                    placeholder="Masukkan email atau username..."
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Masukkan email kamu..."
                     required
                 >
-
+                <span class="field-error" id="email-error"></span>
             </div>
 
             <div class="input-group">
-
-                <label>Password Baru</label>
-
+                <label for="password">Password Baru</label>
                 <input
                     type="password"
                     id="password"
-                    placeholder="Buat password..."
+                    name="password"
+                    placeholder="Buat password (min. 6 karakter)..."
                     required
+                    minlength="6"
                 >
-
+                <span class="field-error" id="password-error"></span>
             </div>
 
-            <button type="submit" class="btn-submit">
-                DAFTAR SEKARANG
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="spinner" id="spinner"></span>
+                <span id="btnText">DAFTAR SEKARANG</span>
             </button>
 
         </form>
@@ -200,31 +237,126 @@
     </div>
 
     <script>
+        const form        = document.getElementById('signupForm');
+        const submitBtn   = document.getElementById('submitBtn');
+        const spinner     = document.getElementById('spinner');
+        const btnText     = document.getElementById('btnText');
+        const alertBox    = document.getElementById('alertBox');
 
-        const signupForm = document.getElementById("signupForm");
+        // ── Helper: tampilkan alert global ──────────────────────────────
+        function showAlert(message, type = 'error') {
+            alertBox.textContent = message;
+            alertBox.className   = `alert-box ${type}`;
+            alertBox.style.display = 'block';
+        }
 
-        signupForm.addEventListener("submit", function(e){
+        function hideAlert() {
+            alertBox.style.display = 'none';
+        }
 
+        // ── Helper: tampilkan / sembunyikan error per field ──────────────
+        function showFieldError(fieldId, message) {
+            const el = document.getElementById(`${fieldId}-error`);
+            if (el) {
+                el.textContent      = message;
+                el.style.display    = 'block';
+            }
+            const input = document.getElementById(fieldId);
+            if (input) input.style.borderColor = '#ff6b6b';
+        }
+
+        function clearFieldErrors() {
+            document.querySelectorAll('.field-error').forEach(el => {
+                el.style.display = 'none';
+                el.textContent   = '';
+            });
+            document.querySelectorAll('.input-group input').forEach(input => {
+                input.style.borderColor = 'rgba(255,255,255,0.2)';
+            });
+        }
+
+        // ── Helper: loading state tombol ────────────────────────────────
+        function setLoading(isLoading) {
+            submitBtn.disabled    = isLoading;
+            spinner.style.display = isLoading ? 'block' : 'none';
+            btnText.textContent   = isLoading ? 'Mendaftar...' : 'DAFTAR SEKARANG';
+        }
+
+        // ── Validasi sederhana sebelum kirim ke server ───────────────────
+        function validateForm(fullname, email, password) {
+            let valid = true;
+
+            if (!fullname.trim()) {
+                showFieldError('fullname', 'Nama lengkap wajib diisi.');
+                valid = false;
+            }
+
+            // Cek format email sederhana
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.trim()) {
+                showFieldError('email', 'Email wajib diisi.');
+                valid = false;
+            } else if (!emailRegex.test(email)) {
+                showFieldError('email', 'Format email tidak valid.');
+                valid = false;
+            }
+
+            if (!password) {
+                showFieldError('password', 'Password wajib diisi.');
+                valid = false;
+            } else if (password.length < 6) {
+                showFieldError('password', 'Password minimal 6 karakter.');
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        // ── Submit handler ───────────────────────────────────────────────
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // ambil data input
-            const fullname = document.getElementById("fullname").value;
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+            hideAlert();
+            clearFieldErrors();
 
-            // simpan ke localStorage
-            localStorage.setItem("fullname", fullname);
-            localStorage.setItem("username", username);
-            localStorage.setItem("password", password);
+            const fullname = document.getElementById('fullname').value.trim();
+            const email    = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
 
-            // notifikasi berhasil
-            alert("Akun berhasil dibuat! Silahkan login terlebih dahulu 😊");
+            // Validasi dulu sebelum kirim
+            if (!validateForm(fullname, email, password)) return;
 
-            // arahkan ke login
-            window.location.href = "index.html";
+            setLoading(true);
 
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ fullname, email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Sukses: tampilkan pesan lalu redirect ke home
+                    showAlert('Akun berhasil dibuat! Mengarahkan ke halaman home...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 1500);
+                } else {
+                    // Error dari server (mis. email sudah dipakai)
+                    showAlert(result.error || 'Pendaftaran gagal. Silakan coba lagi.');
+                }
+
+            } catch (err) {
+                console.error('Signup error:', err);
+                showAlert('Tidak dapat terhubung ke server. Pastikan server sudah berjalan.');
+            } finally {
+                setLoading(false);
+            }
         });
-
     </script>
 
 </body>
