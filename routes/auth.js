@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
         message: 'Login berhasil!',
         user: {
             id: user.id,
-            email: user.email,
+            fullname: user.fullname,
             email: user.email
         }
     });
