@@ -1,11 +1,5 @@
 {
     "version": 2,
-    "redirects": [
-        {
-            "source": "/",
-            "destination": "/index.html"
-        }
-    ],
     "builds": [
         {
             "src": "*.html",
@@ -23,7 +17,11 @@
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "server.js"
+            "dest": "/server.js"
+        },
+        {
+            "src": "/",
+            "dest": "/index.html"
         },
         {
             "src": "/(.*)",
