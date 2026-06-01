@@ -7,13 +7,12 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 
 // ── SIGNUP ────────────────────────────────────────────────
 router.post('/signup', async (req, res) => {
-    const { fullname, email, password } = req.body; // tambah fullname
+    const { fullname, email, password } = req.body;
 
     if (!email || !password) {
         return res.status(400).json({ error: 'Email dan password wajib diisi.' });
     }
 
-    // Cek apakah email sudah terdaftar
     const { data: existing } = await supabase
         .from('users')
         .select('id')
@@ -24,10 +23,8 @@ router.post('/signup', async (req, res) => {
         return res.status(400).json({ error: 'Email sudah terdaftar!' });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Simpan ke Supabase
     const { error } = await supabase
         .from('users')
         .insert([{ fullname, email, password: hashedPassword }]);
@@ -45,24 +42,25 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ error: 'Email dan password wajib diisi.' });
     }
 
-    // Cari user berdasarkan email
     const { data: user, error } = await supabase
         .from('users')
         .select('*')
         .eq('email', email)
         .single();
 
+    // Tambahkan ini untuk debug
+    console.log('User found:', user);
+    console.log('Error:', error);
+
     if (error || !user) {
         return res.status(401).json({ error: 'Akun belum terdaftar atau password salah!' });
     }
 
-    // Bandingkan password dengan yang di database
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
         return res.status(401).json({ error: 'Akun belum terdaftar atau password salah!' });
     }
 
-    // Login berhasil
     res.status(200).json({
         message: 'Login berhasil!',
         user: {
